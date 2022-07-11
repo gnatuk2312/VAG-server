@@ -1,0 +1,5 @@
+{
+    "serverPort": 5000,
+    "dbUrl": "",
+    "secretKey": "mern-secret-key"
+}
