@@ -5,12 +5,32 @@
 		"es2021": true
 	},
 	"extends": [
-		"airbnb-base"
+		"airbnb-base",
+		"prettier"
+	],
+	"plugins": [
+		"prettier"
 	],
 	"parserOptions": {
 		"ecmaVersion": "latest"
 	},
 	"rules": {
-		"no-console": "off"
+		"no-console": "off",
+		"prettier/prettier": [
+			"error",
+			{
+				"arrowParens": "always",
+				"bracketSameLine": false,
+				"bracketSpacing": true,
+				"endOfLine": "auto",
+				"printWidth": 100,
+				"proseWrap": "always",
+				"singleQuote": true,
+				"semi": true,
+				"tabWidth": 4,
+				"trailingComma": "all",
+				"useTabs": true
+			}
+		]
 	}
 }
