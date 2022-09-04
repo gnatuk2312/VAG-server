@@ -10,7 +10,7 @@
 		"lint": "eslint . --ext .js",
 		"lint:fix": "eslint . --fix --ext .js",
 		"prepare": "husky install",
-		"husky:pre-commit": "lint-staged"
+		"husky:pre-commit": "lint-staged && npm test"
 	},
 	"lint-staged": {
 		"*.{js}": [
