@@ -1,0 +1,50 @@
+name: Deploy Master
+on: 
+  push:
+    branches: ['master']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Installing dependencies
+        run: npm install
+      - name: Running linter
+        run: npm run lint:fix
+      - name: Running test
+        run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "vag-server"
+          heroku_email: "vvllaadd1233345@gmail.com"
+
+# name: Deploy master
+# on:
+#   push:
+#     branches: [ master ]
+#   workflow_dispatch:
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Use Node.js
+#         uses: actions/setup-node@v2
+#         with: 
+#           node-version: "14.x"
+#       - name: Installing dependencies
+#         run: npm install
+#       - name: Running linter
+#         run: npm run lint:fix
+#       - name: Running test
+#         run: npm test

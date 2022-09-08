@@ -1,0 +1,18 @@
+name: Check Pull Request
+on: 
+  pull_request:
+    branches: ['master']
+jobs:
+  check-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Installing dependencies
+        run: npm install
+      - name: Running linter
+        run: npm run lint:fix
+      - name: Running test
+        run: npm test
