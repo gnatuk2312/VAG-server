@@ -26,6 +26,4 @@ const clientSchema = Schema({
 
 const Client = model('client', clientSchema);
 
-module.exports = {
-	Client,
-};
+module.exports = Client;

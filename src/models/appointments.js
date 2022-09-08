@@ -23,6 +23,4 @@ const appointmentSchema = Schema(
 
 const Appointment = model('appointment', appointmentSchema);
 
-module.exports = {
-	Appointment,
-};
+module.exports = Appointment;

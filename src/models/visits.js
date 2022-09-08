@@ -24,6 +24,4 @@ const visitSchema = Schema({
 
 const Visit = model('visit', visitSchema);
 
-module.exports = {
-	Visit,
-};
+module.exports = Visit;
