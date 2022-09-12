@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const Joi = require('joi');
 
 const appointmentSchema = Schema(
 	{
@@ -23,4 +24,15 @@ const appointmentSchema = Schema(
 
 const Appointment = model('appointment', appointmentSchema);
 
-module.exports = Appointment;
+const schemaCreateAppointment = Joi.object({
+	date: Joi.date().required(),
+	hour: Joi.string().required(),
+	name: Joi.string().required(),
+	phone: Joi.string().required(),
+	email: Joi.string().email(),
+});
+
+module.exports = {
+	Appointment,
+	schemaCreateAppointment,
+};
