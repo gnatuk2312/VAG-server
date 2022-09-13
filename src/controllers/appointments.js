@@ -1,5 +1,7 @@
-const { getAppointmentsByDateService } = require('../services/appointments');
-const { Appointment } = require('../models/appointments');
+const {
+	getAppointmentsByDateService,
+	createAppointmentService,
+} = require('../services/appointments');
 
 const getAppointmentsByDate = async (req, res) => {
 	const date = req.params.getByDate;
@@ -10,7 +12,7 @@ const getAppointmentsByDate = async (req, res) => {
 };
 
 const createAppointment = async (req, res) => {
-	const appointment = await Appointment.create(req.body);
+	const appointment = await createAppointmentService(req.body);
 
 	res.status(201).json({ appointment });
 };

@@ -6,4 +6,10 @@ const getAppointmentsByDateService = async (date) => {
 	return appointments;
 };
 
-module.exports = { getAppointmentsByDateService };
+const createAppointmentService = async (body) => {
+	const appointment = await Appointment.create(body);
+
+	return appointment;
+};
+
+module.exports = { getAppointmentsByDateService, createAppointmentService };
