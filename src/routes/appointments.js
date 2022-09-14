@@ -3,8 +3,7 @@ const Joi = require('joi');
 const wrapper = require('../middleware/wrapper');
 const validator = require('../middleware/validator');
 
-const { getAppointmentsByDate } = require('../controllers/appointments');
-const { createAppointment } = require('../controllers/appointments');
+const { getAppointmentsByDate, createAppointment } = require('../controllers/appointments');
 
 const validatorGetByDate = Joi.object({
 	getByDate: Joi.date().required(),
