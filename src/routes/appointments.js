@@ -3,7 +3,17 @@ const Joi = require('joi');
 const wrapper = require('../middleware/wrapper');
 const validator = require('../middleware/validator');
 
-const { getAppointmentsByDate, createAppointment } = require('../controllers/appointments');
+const {
+	getAllAppointments,
+	getAppointmentsByDate,
+	createAppointment,
+} = require('../controllers/appointments');
+
+const validatorGet = Joi.object({
+	limit: Joi.number(),
+	page: Joi.number(),
+});
+router.get('/', validator.query(validatorGet), wrapper(getAllAppointments));
 
 const validatorGetByDate = Joi.object({
 	getByDate: Joi.date().required(),

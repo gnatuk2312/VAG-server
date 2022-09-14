@@ -1,6 +1,7 @@
 const {
 	getAppointmentsByDateService,
 	createAppointmentService,
+	getAllAppointmentsService,
 } = require('../services/appointments');
 
 const getAppointmentsByDate = async (req, res) => {
@@ -17,4 +18,10 @@ const createAppointment = async (req, res) => {
 	res.status(201).json({ appointment });
 };
 
-module.exports = { getAppointmentsByDate, createAppointment };
+const getAllAppointments = async (req, res) => {
+	const appointments = await getAllAppointmentsService(req.query);
+
+	res.json({ appointments });
+};
+
+module.exports = { getAppointmentsByDate, createAppointment, getAllAppointments };
