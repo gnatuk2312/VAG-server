@@ -6,4 +6,10 @@ const createClientService = async (body) => {
 	return client;
 };
 
-module.exports = { createClientService };
+const getByIDService = async (id) => {
+	const client = await Client.findById(id);
+
+	return client;
+};
+
+module.exports = { createClientService, getByIDService };

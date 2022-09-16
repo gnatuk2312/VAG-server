@@ -1,9 +1,15 @@
 const router = require('express').Router();
 const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const wrapper = require('../middleware/wrapper');
 const validator = require('../middleware/validator');
 
-const { createClient } = require('../controllers/clients');
+const { getByID, createClient } = require('../controllers/clients');
+
+const validatorGetById = Joi.object({
+	id: Joi.objectId().required(),
+});
+router.get('/:id', validator.params(validatorGetById), wrapper(getByID));
 
 const validatorCreateClient = Joi.object({
 	name: Joi.string().required(),
