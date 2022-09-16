@@ -1,4 +1,8 @@
-const { createClientService, getClientByIDService } = require('../services/clients');
+const {
+	createClientService,
+	getClientByIDService,
+	updateClientService,
+} = require('../services/clients');
 
 const createClient = async (req, res) => {
 	const client = await createClientService(req.body);
@@ -16,4 +20,12 @@ const getClientByID = async (req, res) => {
 		: res.status(404).json({ message: `Client not found by ID - ${clientID}` });
 };
 
-module.exports = { createClient, getClientByID };
+const updateClient = async (req, res) => {
+	const clientID = req.params.id;
+
+	const client = await updateClientService(clientID, req.body);
+
+	res.json({ client });
+};
+
+module.exports = { createClient, getClientByID, updateClient };

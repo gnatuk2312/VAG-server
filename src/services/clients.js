@@ -12,4 +12,10 @@ const getClientByIDService = async (id) => {
 	return client;
 };
 
-module.exports = { createClientService, getClientByIDService };
+const updateClientService = async (id, body) => {
+	const client = await Client.findByIdAndUpdate(id, body, { new: true });
+
+	return client;
+};
+
+module.exports = { createClientService, getClientByIDService, updateClientService };
