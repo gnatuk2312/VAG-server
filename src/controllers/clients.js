@@ -25,7 +25,9 @@ const updateClient = async (req, res) => {
 
 	const client = await updateClientService(clientID, req.body);
 
-	res.json({ client });
+	client
+		? res.json({ client })
+		: res.status(404).json({ message: `Client not found by ID - ${clientID}` });
 };
 
 module.exports = { createClient, getClientByID, updateClient };
