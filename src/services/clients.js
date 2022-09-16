@@ -6,4 +6,10 @@ const createClientService = async (body) => {
 	return client;
 };
 
-module.exports = { createClientService };
+const updateClientService = async (id, body) => {
+	const client = await Client.findByIdAndUpdate(id, body, { new: true });
+
+	return client;
+};
+
+module.exports = { createClientService, updateClientService };
