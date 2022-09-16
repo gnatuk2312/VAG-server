@@ -2,6 +2,7 @@ const {
 	createClientService,
 	getClientByIDService,
 	updateClientService,
+	deleteClientService,
 } = require('../services/clients');
 
 const createClient = async (req, res) => {
@@ -20,6 +21,16 @@ const getClientByID = async (req, res) => {
 		: res.status(404).json({ message: `Client not found by ID - ${clientID}` });
 };
 
+const deleteClient = async (req, res) => {
+	const clientID = req.params.id;
+
+	const client = await deleteClientService(clientID);
+
+	client
+		? res.json({ client })
+		: res.status(404).json({ message: `Client not found by ID - ${clientID}` });
+};
+
 const updateClient = async (req, res) => {
 	const clientID = req.params.id;
 
@@ -30,4 +41,4 @@ const updateClient = async (req, res) => {
 		: res.status(404).json({ message: `Client not found by ID - ${clientID}` });
 };
 
-module.exports = { createClient, getClientByID, updateClient };
+module.exports = { createClient, getClientByID, updateClient, deleteClient };

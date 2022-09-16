@@ -4,12 +4,17 @@ Joi.objectId = require('joi-objectid')(Joi);
 const wrapper = require('../middleware/wrapper');
 const validator = require('../middleware/validator');
 
-const { getClientByID, createClient, updateClient } = require('../controllers/clients');
+const {
+	getClientByID,
+	createClient,
+	updateClient,
+	deleteClient,
+} = require('../controllers/clients');
 
-const validatorGetById = Joi.object({
+const validatorClientID = Joi.object({
 	id: Joi.objectId().required(),
 });
-router.get('/:id', validator.params(validatorGetById), wrapper(getClientByID));
+router.get('/:id', validator.params(validatorClientID), wrapper(getClientByID));
 
 const validatorCreateClient = Joi.object({
 	name: Joi.string().required(),
@@ -21,9 +26,6 @@ const validatorCreateClient = Joi.object({
 });
 router.post('/', validator.body(validatorCreateClient), wrapper(createClient));
 
-const validatorClientID = Joi.object({
-	id: Joi.objectId().required(),
-});
 const validatorUpdateClient = Joi.object({
 	name: Joi.string().required(),
 	phone: Joi.string(),
@@ -39,5 +41,7 @@ router.put(
 	validator.body(validatorUpdateClient),
 	wrapper(updateClient),
 );
+
+router.delete('/:id', validator.params(validatorClientID), wrapper(deleteClient));
 
 module.exports = router;

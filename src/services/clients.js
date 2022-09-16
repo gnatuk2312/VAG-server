@@ -18,4 +18,15 @@ const updateClientService = async (id, body) => {
 	return client;
 };
 
-module.exports = { createClientService, getClientByIDService, updateClientService };
+const deleteClientService = async (id) => {
+	const client = await Client.findByIdAndDelete(id);
+
+	return client;
+};
+
+module.exports = {
+	createClientService,
+	getClientByIDService,
+	updateClientService,
+	deleteClientService,
+};
