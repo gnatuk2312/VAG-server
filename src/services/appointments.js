@@ -24,7 +24,7 @@ const getAllAppointmentsService = async ({ limit = 1, page = 1 }) => {
 				appointments: { $push: '$$ROOT' },
 			},
 		},
-		{ $sort: { _id: 1 } },
+		{ $sort: { _id: -1 } },
 	]);
 
 	return appointments;
