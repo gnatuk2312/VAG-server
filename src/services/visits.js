@@ -6,4 +6,10 @@ const createVisitService = async (body) => {
 	return visit;
 };
 
-module.exports = { createVisitService };
+const getVisitByIDService = async (id) => {
+	const visit = await Visit.findById(id);
+
+	return visit;
+};
+
+module.exports = { createVisitService, getVisitByIDService };
