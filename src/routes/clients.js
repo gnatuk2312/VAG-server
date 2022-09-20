@@ -9,6 +9,7 @@ const {
 	createClient,
 	updateClient,
 	deleteClient,
+	getAllClients,
 } = require('../controllers/clients');
 
 const validatorClientID = Joi.object({
@@ -43,5 +44,12 @@ router.put(
 );
 
 router.delete('/:id', validator.params(validatorClientID), wrapper(deleteClient));
+
+const validatorGetAllClients = Joi.object({
+	limit: Joi.number(),
+	page: Joi.number(),
+	filter: Joi.string(),
+});
+router.get('/', validator.query(validatorGetAllClients), wrapper(getAllClients));
 
 module.exports = router;

@@ -24,9 +24,28 @@ const deleteClientService = async (id) => {
 	return client;
 };
 
+const getAllClientsService = async ({ limit = 1, page = 1, filter }) => {
+	const skip = (page - 1) * limit;
+
+	if (filter) {
+		const [field, value] = filter.split('|');
+
+		const clients = await Client.find({ [field]: { $regex: new RegExp(value, 'i') } })
+			.skip(skip)
+			.limit(limit);
+
+		return clients;
+	}
+
+	const clients = await Client.find().skip(skip).limit(limit);
+
+	return clients;
+};
+
 module.exports = {
 	createClientService,
 	getClientByIDService,
 	updateClientService,
 	deleteClientService,
+	getAllClientsService,
 };
