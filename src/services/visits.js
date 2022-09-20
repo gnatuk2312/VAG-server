@@ -18,4 +18,15 @@ const deleteVisitService = async (id) => {
 	return visit;
 };
 
-module.exports = { createVisitService, getVisitByIDService, deleteVisitService };
+const updateVisitService = async (id, body) => {
+	const visit = await Visit.findByIdAndUpdate(id, body, { new: true });
+
+	return visit;
+};
+
+module.exports = {
+	createVisitService,
+	getVisitByIDService,
+	deleteVisitService,
+	updateVisitService,
+};

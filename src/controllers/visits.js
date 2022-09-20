@@ -2,6 +2,7 @@ const {
 	createVisitService,
 	getVisitByIDService,
 	deleteVisitService,
+	updateVisitService,
 } = require('../services/visits');
 
 const createVisit = async (req, res) => {
@@ -30,4 +31,14 @@ const deleteVisit = async (req, res) => {
 		: res.status(404).json({ message: `Visit not found by ID - ${visitID}` });
 };
 
-module.exports = { createVisit, getVisitByID, deleteVisit };
+const updateVisit = async (req, res) => {
+	const visitID = req.params.id;
+
+	const visit = await updateVisitService(visitID, req.body);
+
+	visit
+		? res.json({ visit })
+		: res.status(404).json({ message: `Visit not found by ID - ${visitID}` });
+};
+
+module.exports = { createVisit, getVisitByID, deleteVisit, updateVisit };
