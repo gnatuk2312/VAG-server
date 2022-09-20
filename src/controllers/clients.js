@@ -4,6 +4,7 @@ const {
 	updateClientService,
 	deleteClientService,
 	getAllClientsService,
+	getAllVisitsByClientIdService,
 } = require('../services/clients');
 
 const createClient = async (req, res) => {
@@ -48,4 +49,21 @@ const getAllClients = async (req, res) => {
 	res.json({ clients });
 };
 
-module.exports = { createClient, getClientByID, updateClient, deleteClient, getAllClients };
+const getAllVisitsByClientId = async (req, res) => {
+	const { clientID } = req.params;
+
+	const visits = await getAllVisitsByClientIdService(clientID, req.query);
+
+	visits
+		? res.json({ visits })
+		: res.status(404).json({ message: `Visits not found by ID - ${clientID}` });
+};
+
+module.exports = {
+	createClient,
+	getClientByID,
+	updateClient,
+	deleteClient,
+	getAllClients,
+	getAllVisitsByClientId,
+};

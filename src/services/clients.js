@@ -1,4 +1,5 @@
 const Client = require('../models/clients');
+const Visit = require('../models/visits');
 
 const createClientService = async (body) => {
 	const client = await Client.create(body);
@@ -42,10 +43,20 @@ const getAllClientsService = async ({ limit = 1, page = 1, filter }) => {
 	return clients;
 };
 
+const getAllVisitsByClientIdService = async (id, query) => {
+	const { limit = 1, page = 1 } = query;
+	const skip = (page - 1) * limit;
+
+	const visits = await Visit.find({ clientId: id }).skip(skip).limit(limit);
+
+	return visits;
+};
+
 module.exports = {
 	createClientService,
 	getClientByIDService,
 	updateClientService,
 	deleteClientService,
 	getAllClientsService,
+	getAllVisitsByClientIdService,
 };
