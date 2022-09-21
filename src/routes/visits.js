@@ -4,7 +4,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 const wrapper = require('../middleware/wrapper');
 const validator = require('../middleware/validator');
 
-const { createVisit, getVisitByID } = require('../controllers/visits');
+const { createVisit, getVisitByID, deleteVisit } = require('../controllers/visits');
 
 const validatorCreateVisit = Joi.object({
 	clientId: Joi.objectId().required(),
@@ -20,5 +20,7 @@ const validatorVisitID = Joi.object({
 	id: Joi.objectId().required(),
 });
 router.get('/:id', validator.params(validatorVisitID), wrapper(getVisitByID));
+
+router.delete('/:id', validator.params(validatorVisitID), wrapper(deleteVisit));
 
 module.exports = router;

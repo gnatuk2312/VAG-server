@@ -12,4 +12,10 @@ const getVisitByIDService = async (id) => {
 	return visit;
 };
 
-module.exports = { createVisitService, getVisitByIDService };
+const deleteVisitService = async (id) => {
+	const visit = await Visit.findByIdAndDelete(id);
+
+	return visit;
+};
+
+module.exports = { createVisitService, getVisitByIDService, deleteVisitService };
