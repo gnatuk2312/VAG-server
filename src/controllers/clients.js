@@ -3,6 +3,7 @@ const {
 	getClientByIDService,
 	updateClientService,
 	deleteClientService,
+	getAllClientsService,
 } = require('../services/clients');
 
 const createClient = async (req, res) => {
@@ -41,4 +42,10 @@ const updateClient = async (req, res) => {
 		: res.status(404).json({ message: `Client not found by ID - ${clientID}` });
 };
 
-module.exports = { createClient, getClientByID, updateClient, deleteClient };
+const getAllClients = async (req, res) => {
+	const clients = await getAllClientsService(req.query);
+
+	res.json({ clients });
+};
+
+module.exports = { createClient, getClientByID, updateClient, deleteClient, getAllClients };
