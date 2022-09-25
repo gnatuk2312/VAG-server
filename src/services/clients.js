@@ -53,9 +53,7 @@ const getAllVisitsByClientIdService = async (id, query) => {
 };
 
 const deleteAllVisitsByClientIdService = async (id) => {
-	const visits = await Visit.deleteMany({ clientId: id });
-
-	return visits;
+	await Visit.deleteMany({ clientId: id });
 };
 
 module.exports = {

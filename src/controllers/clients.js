@@ -63,11 +63,9 @@ const getAllVisitsByClientId = async (req, res) => {
 const deleteAllVisitsByClientId = async (req, res) => {
 	const { clientID } = req.params;
 
-	const visits = deleteAllVisitsByClientIdService(clientID);
+	await deleteAllVisitsByClientIdService(clientID);
 
-	visits
-		? res.json({ visits })
-		: res.status(404).json({ message: `Visits not found by ID - ${clientID}` });
+	res.status(204).send();
 };
 
 module.exports = {
