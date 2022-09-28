@@ -8,7 +8,7 @@ const { createVisit, getVisitByID, deleteVisit, updateVisit } = require('../cont
 
 const validatorCreateVisit = Joi.object({
 	clientId: Joi.objectId().required(),
-	date: Joi.date(),
+	date: Joi.string(),
 	type: Joi.string(),
 	description: Joi.string(),
 	price: Joi.number(),
@@ -25,7 +25,7 @@ router.delete('/:id', validator.params(validatorVisitID), wrapper(deleteVisit));
 
 const validatorUpdateVisit = Joi.object({
 	clientId: Joi.objectId().required(),
-	date: Joi.date(),
+	date: Joi.string(),
 	type: Joi.string(),
 	description: Joi.string(),
 	price: Joi.number(),

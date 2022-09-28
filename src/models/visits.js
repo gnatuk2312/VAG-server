@@ -7,7 +7,7 @@ const visitSchema = Schema(
 			ref: 'client',
 		},
 		date: {
-			type: Date,
+			type: String,
 		},
 		type: {
 			type: String,
