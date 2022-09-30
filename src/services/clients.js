@@ -52,6 +52,10 @@ const getAllVisitsByClientIdService = async (id, query) => {
 	return visits;
 };
 
+const deleteAllVisitsByClientIdService = async (id) => {
+	await Visit.deleteMany({ clientId: id });
+};
+
 module.exports = {
 	createClientService,
 	getClientByIDService,
@@ -59,4 +63,5 @@ module.exports = {
 	deleteClientService,
 	getAllClientsService,
 	getAllVisitsByClientIdService,
+	deleteAllVisitsByClientIdService,
 };

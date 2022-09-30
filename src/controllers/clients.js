@@ -5,6 +5,7 @@ const {
 	deleteClientService,
 	getAllClientsService,
 	getAllVisitsByClientIdService,
+	deleteAllVisitsByClientIdService,
 } = require('../services/clients');
 
 const createClient = async (req, res) => {
@@ -59,6 +60,14 @@ const getAllVisitsByClientId = async (req, res) => {
 		: res.status(404).json({ message: `Visits not found by ID - ${clientID}` });
 };
 
+const deleteAllVisitsByClientId = async (req, res) => {
+	const { clientID } = req.params;
+
+	await deleteAllVisitsByClientIdService(clientID);
+
+	res.status(204).send();
+};
+
 module.exports = {
 	createClient,
 	getClientByID,
@@ -66,4 +75,5 @@ module.exports = {
 	deleteClient,
 	getAllClients,
 	getAllVisitsByClientId,
+	deleteAllVisitsByClientId,
 };
