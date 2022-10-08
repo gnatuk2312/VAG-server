@@ -1,10 +1,12 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
+const cron = require('node-cron');
 
 const appointmentsRouter = require('./routes/appointments');
 const clientsRouter = require('./routes/clients');
 const visitsRouter = require('./routes/visits');
+const deleteAppointmentsOlderThanTwoMonths = require('./services/workers');
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use('/api/appointments', appointmentsRouter);
 app.use('/api/clients', clientsRouter);
 app.use('/api/visits', visitsRouter);
+
+cron.schedule('0 0 * * *', deleteAppointmentsOlderThanTwoMonths);
 
 app.use((_, res) => {
 	res.status(404).json({ message: 'Not found' });
