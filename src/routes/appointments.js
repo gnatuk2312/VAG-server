@@ -8,12 +8,13 @@ const {
 	getAppointmentsByDate,
 	createAppointment,
 } = require('../controllers/appointments');
+const auth = require('../middleware/authorization');
 
 const validatorGet = Joi.object({
 	limit: Joi.number(),
 	page: Joi.number(),
 });
-router.get('/', validator.query(validatorGet), wrapper(getAllAppointments));
+router.get('/', validator.query(validatorGet), auth, wrapper(getAllAppointments));
 
 const validatorGetByDate = Joi.object({
 	getByDate: Joi.date().required(),
