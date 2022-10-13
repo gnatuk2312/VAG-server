@@ -16,6 +16,12 @@ const getAllAppointmentsService = async ({ limit = 1, page = 1 }) => {
 	const skip = (page - 1) * limit;
 
 	const appointments = await Appointment.aggregate([
+		{
+			$sort: {
+				date: -1,
+				_id: -1,
+			},
+		},
 		{ $skip: skip },
 		{ $limit: limit },
 		{
@@ -24,7 +30,11 @@ const getAllAppointmentsService = async ({ limit = 1, page = 1 }) => {
 				appointments: { $push: '$$ROOT' },
 			},
 		},
-		{ $sort: { _id: -1 } },
+		{
+			$sort: {
+				_id: -1,
+			},
+		},
 	]);
 
 	return appointments;
