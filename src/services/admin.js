@@ -9,7 +9,7 @@ const signinService = async ({ password, login }) => {
 
 	const payload = { login };
 
-	const accessToken = await jwt.sign(payload, SECRET_KEY, { expiresIn: '1m' });
+	const accessToken = await jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
 	const refreshToken = await jwt.sign(payload, SECRET_KEY, { expiresIn: '30d' });
 
 	return { accessToken, refreshToken };
@@ -23,7 +23,7 @@ const refreshTokenService = async (token) => {
 
 		const payload = { login };
 
-		const accessToken = await jwt.sign(payload, SECRET_KEY, { expiresIn: '1m' });
+		const accessToken = await jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
 
 		return accessToken;
 	} catch {
